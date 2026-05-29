@@ -1,0 +1,2475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klyme | Movement That Fits Your Life</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+    :root {
+      --ink: #f7f7f1;
+      --paper: #f4f1ea;
+      --night: #050606;
+      --night-2: #0b0d0d;
+      --carbon: #141715;
+      --line: rgba(255, 255, 255, .11);
+      --line-dark: rgba(8, 10, 9, .12);
+      --muted: rgba(247, 247, 241, .64);
+      --muted-dark: rgba(13, 16, 14, .58);
+      --acid: #cdf43a;
+      --moss: #728a47;
+      --clay: #b88967;
+      --steel: #8fa1a0;
+      --radius: 8px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --ease-premium: cubic-bezier(.2, .72, .2, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      min-width: 320px;
+      background: var(--paper);
+      color: #101311;
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { border: 0; font: inherit; cursor: pointer; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(205, 244, 58, .95);
+      outline-offset: 4px;
+      border-radius: 6px;
+    }
+    .container { width: min(100% - 48px, 1180px); margin-inline: auto; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: var(--acid);
+    }
+    .btn {
+      position: relative;
+      overflow: hidden;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border-radius: 999px;
+      padding: 0 28px;
+      font-weight: 750;
+      transition: transform .25s var(--ease-premium), border-color .25s ease, background .25s ease, box-shadow .25s ease;
+      white-space: nowrap;
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.28) 44%, transparent 58%);
+      transform: translateX(-120%);
+      transition: transform .75s var(--ease-premium);
+      pointer-events: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, .16);
+    }
+    .btn:hover::after { transform: translateX(120%); }
+    .btn-primary { background: var(--acid); color: #050606; }
+    .btn-secondary { border: 1px solid var(--line); color: rgba(247, 247, 241, .76); background: rgba(255, 255, 255, .02); }
+    .btn-dark { background: #0d100e; color: var(--ink); }
+    .btn-ghost { border: 1px solid var(--line-dark); color: #151815; background: transparent; }
+    .section { padding: 112px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+      gap: 56px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+    .section-kicker {
+      color: var(--moss);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    h2 {
+      max-width: 760px;
+      font-size: clamp(38px, 5.5vw, 74px);
+      line-height: .94;
+      letter-spacing: -.04em;
+      font-weight: 700;
+    }
+    h2 em, .hero h1 em {
+      color: var(--acid);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -.06em;
+    }
+    .section-copy {
+      color: var(--muted-dark);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .announce {
+      height: 34px;
+      display: grid;
+      place-items: center;
+      align-items: center;
+      background: #0a0b09;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      color: var(--acid);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+    }
+    .announce span {
+      opacity: .86;
+      white-space: nowrap;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: 34px;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(5, 6, 6, .68), rgba(5, 6, 6, .38));
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .nav-inner {
+      width: calc(100% - 128px);
+      max-width: none;
+      height: 68px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 24px;
+      color: var(--ink);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-self: center;
+      height: 68px;
+      line-height: 1;
+    }
+    .brand-logo {
+      width: auto;
+      height: 30px;
+      display: block;
+      transform: translateY(1px);
+    }
+    .brand-mark {
+      display: none;
+    }
+    .nav-links, .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      min-height: 68px;
+      color: rgba(247, 247, 241, .68);
+      font-size: 16px;
+      line-height: 1;
+    }
+    .nav-links a, .nav-actions a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 68px;
+      transition: color .2s ease;
+    }
+    .nav-links a::after, .nav-actions a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 18px;
+      height: 1px;
+      background: var(--acid);
+      transform: scaleX(0);
+      transform-origin: left;
+      opacity: .9;
+      transition: transform .28s var(--ease-premium);
+    }
+    .nav-links a:hover, .nav-actions a:hover {
+      color: var(--ink);
+    }
+    .nav-links a:hover::after, .nav-actions a:hover::after {
+      transform: scaleX(1);
+    }
+    .nav-links { justify-self: start; }
+    .nav-actions { justify-self: end; justify-content: end; gap: 24px; }
+    .cart { position: relative; }
+    .cart::after {
+      content: attr(data-count);
+      position: absolute;
+      top: -11px;
+      right: -16px;
+      width: 16px;
+      height: 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--acid);
+      color: #0a0b09;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .menu { display: none; }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 34px);
+      overflow: hidden;
+      background: #050606;
+      color: var(--ink);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 72% 42%, rgba(111, 130, 112, .18), transparent 28%),
+        radial-gradient(circle at 28% 48%, rgba(5, 6, 6, .78), rgba(5, 6, 6, .48) 29%, transparent 57%),
+        linear-gradient(90deg, rgba(5, 6, 6, .92) 0%, rgba(5, 6, 6, .74) 25%, rgba(5, 6, 6, .38) 54%, rgba(5, 6, 6, .08) 100%),
+        linear-gradient(180deg, rgba(5, 6, 6, .16) 0%, rgba(5, 6, 6, 0) 22%, rgba(5, 6, 6, .44) 100%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 36%;
+      background: linear-gradient(0deg, #050606 0%, rgba(5, 6, 6, 0) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/klyme-hero-walking-pad.png");
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      background-position: right bottom;
+      opacity: .84;
+      filter: saturate(.86) contrast(1.08) brightness(.92);
+      transform: scale(1.018);
+      animation: heroImageSettle 1400ms var(--ease-premium) 120ms both;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      min-height: calc(100vh - 34px);
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+    .hero-copy {
+      width: min(520px, 100%);
+      align-self: center;
+      padding: 82px 0 72px;
+    }
+    .hero-copy > * {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: heroReveal 760ms var(--ease-premium) both;
+    }
+    .hero-copy > *:nth-child(1) { animation-delay: 120ms; }
+    .hero-copy > *:nth-child(2) { animation-delay: 220ms; }
+    .hero-copy > *:nth-child(3) { animation-delay: 320ms; }
+    .hero-copy > *:nth-child(4) { animation-delay: 430ms; }
+    .hero-copy > *:nth-child(5) { animation-delay: 540ms; }
+    .hero h1 {
+      margin-top: 30px;
+      font-size: clamp(54px, 7vw, 92px);
+      line-height: .88;
+      letter-spacing: -.06em;
+      font-weight: 760;
+    }
+    .hero p {
+      max-width: 470px;
+      margin-top: 28px;
+      color: rgba(247, 247, 241, .66);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .hero p strong { color: var(--ink); }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 42px;
+    }
+    .review-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 46px;
+      color: rgba(247, 247, 241, .52);
+      font-size: 14px;
+    }
+    .stars {
+      color: var(--acid);
+      letter-spacing: 1px;
+      font-size: 15px;
+    }
+    .callout {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 160px;
+      padding: 14px 17px;
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 12px;
+      background: rgba(5, 6, 6, .72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, .28);
+      animation: calloutFloat 5600ms ease-in-out infinite;
+    }
+    .quiet { animation-delay: -1800ms; }
+    .callout .icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(205, 244, 58, .12);
+      color: var(--acid);
+      font-weight: 900;
+    }
+    .callout b {
+      display: block;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .callout small {
+      display: block;
+      margin-top: 4px;
+      color: rgba(247, 247, 241, .38);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .capacity { top: 29%; right: 5.5%; }
+    .quiet { bottom: 24%; right: 34%; }
+    .hero-proof {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(3, 140px) 1fr;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      border-right: 1px solid rgba(255, 255, 255, .05);
+    }
+    .hero-stat {
+      min-height: 96px;
+      display: grid;
+      place-items: center;
+      border-left: 1px solid rgba(255, 255, 255, .08);
+      text-align: center;
+    }
+    .hero-stat b {
+      color: var(--ink);
+      font-size: 28px;
+      letter-spacing: -.05em;
+      line-height: .9;
+    }
+    .hero-stat span {
+      margin-left: 2px;
+      color: rgba(247, 247, 241, .58);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .hero-stat small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(247, 247, 241, .34);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .featured {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: clamp(18px, 3vw, 42px);
+      padding-right: 10px;
+      color: rgba(247, 247, 241, .22);
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .featured span:first-child {
+      color: rgba(247, 247, 241, .32);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes heroImageSettle {
+      from { opacity: .58; transform: scale(1.04) translateX(18px); }
+      to { opacity: .84; transform: scale(1.018) translateX(0); }
+    }
+    @keyframes calloutFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .paths {
+      position: relative;
+      overflow: hidden;
+      background: #0a0d0b;
+      color: var(--ink);
+      padding-top: 126px;
+    }
+    .paths::before {
+      content: "";
+      position: absolute;
+      inset: -18% -12% auto;
+      height: 460px;
+      background:
+        radial-gradient(circle at 26% 14%, rgba(205, 244, 58, .08), transparent 28%),
+        radial-gradient(circle at 68% 38%, rgba(143, 161, 160, .11), transparent 32%);
+      opacity: .9;
+      pointer-events: none;
+    }
+    .paths .container { position: relative; z-index: 1; }
+    .paths .section-head {
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      padding-bottom: 44px;
+      margin-bottom: 34px;
+    }
+    .paths h2 {
+      max-width: 740px;
+      text-wrap: balance;
+    }
+    .paths .section-copy {
+      color: rgba(247, 247, 241, .62);
+      max-width: 390px;
+    }
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .path-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      row-gap: 26px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 30px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0) 42%),
+        #070908;
+      transition: transform .35s var(--ease-premium), border-color .35s ease, background .35s ease, box-shadow .35s ease;
+    }
+    .path-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(205, 244, 58, .08), transparent 36%);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    .path-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, .18);
+      box-shadow: 0 32px 90px rgba(0,0,0,.28);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, 0) 42%),
+        #070908;
+    }
+    .path-card:hover::before { opacity: 1; }
+    .path-card:hover .path-visual img { transform: scale(1.035); }
+    .path-visual {
+      position: relative;
+      height: clamp(300px, 25vw, 372px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #151816;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+    }
+    .path-visual img,
+    .feature-top img,
+    .mini-thumb img,
+    .ritual-visual img,
+    .article img,
+    .storage-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .path-visual img {
+      transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+    }
+    .path-card:first-child .path-visual img {
+      object-position: center 82%;
+    }
+    .path-card:nth-child(2) .path-visual img {
+      object-position: center 68%;
+    }
+    .path-visual::after,
+    .feature-top::after,
+    .article::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 48%, rgba(5, 6, 6, .42));
+      pointer-events: none;
+    }
+    .path-label {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      background: rgba(5, 6, 6, .58);
+      color: rgba(247, 247, 241, .76);
+      backdrop-filter: blur(14px);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .path-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 18px rgba(205, 244, 58, .75);
+    }
+    .pad {
+      position: absolute;
+      inset: 56px 6% 20px;
+      border-radius: 32px;
+      background: linear-gradient(120deg, #070808, #242824 48%, #060707);
+      box-shadow: 0 34px 80px rgba(0, 0, 0, .72);
+    }
+    .pad::before {
+      content: "";
+      position: absolute;
+      inset: 24px 15%;
+      border-radius: 18px;
+      background: linear-gradient(90deg, #1e2320, #3f453f, #151817);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+    .stepper {
+      position: absolute;
+      inset: 50px 16% 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      transform: rotateZ(7deg);
+    }
+    .stepper span {
+      border-radius: 22px;
+      background: linear-gradient(135deg, #2a2f2a, #090a09 60%);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, .62);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+    .path-meta {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+    }
+    .path-meta h3 {
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: .92;
+      letter-spacing: -.05em;
+      max-width: 410px;
+      text-wrap: balance;
+    }
+    .path-meta p {
+      margin-top: 16px;
+      color: rgba(247, 247, 241, .56);
+      max-width: 410px;
+    }
+    .path-specs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      padding: 0;
+      list-style: none;
+    }
+    .path-specs li {
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 999px;
+      padding: 0 11px;
+      color: rgba(247, 247, 241, .52);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .path-meta .btn {
+      min-width: 138px;
+      align-self: end;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 999px;
+      padding: 9px 14px;
+      color: rgba(247, 247, 241, .64);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .products { background: var(--paper); }
+    .product-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: -18px 0 24px;
+      color: var(--muted-dark);
+      font-size: 14px;
+    }
+    .selector-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .selector-pills span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border: 1px solid var(--line-dark);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .4);
+      color: rgba(13, 16, 14, .64);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .selector-pills span:first-child {
+      background: #0d100e;
+      color: var(--ink);
+      border-color: #0d100e;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+    }
+    .feature-product, .product-list {
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius);
+      background: #fbfaf6;
+      box-shadow: 0 18px 54px rgba(13, 16, 14, .04);
+    }
+    .feature-product {
+      min-height: 620px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .feature-product:hover, .mini-product:hover {
+      transform: translateY(-2px);
+      border-color: rgba(13, 16, 14, .22);
+      box-shadow: 0 24px 70px rgba(13, 16, 14, .08);
+    }
+    .feature-product:hover .feature-top img,
+    .mini-product:hover .mini-thumb img {
+      filter: saturate(1) contrast(1.04);
+    }
+    .feature-top {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 390px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.18)),
+        #d9d4c8;
+      overflow: hidden;
+    }
+    .feature-top img {
+      filter: saturate(.94) contrast(1.02);
+    }
+    .feature-body {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+    }
+    .product-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 0;
+    }
+    .product-badges span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(13, 16, 14, .06);
+      color: rgba(13, 16, 14, .62);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .feature-body h3 {
+      font-size: clamp(34px, 4.8vw, 58px);
+      line-height: .9;
+      letter-spacing: -.05em;
+    }
+    .feature-body p { margin-top: 14px; color: var(--muted-dark); max-width: 460px; }
+    .feature-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: end;
+    }
+    .product-note {
+      color: rgba(13, 16, 14, .46);
+      font-size: 12px;
+      text-align: right;
+      max-width: 150px;
+    }
+    .price {
+      color: #0d100e;
+      font-size: 28px;
+      font-weight: 850;
+      letter-spacing: -.04em;
+    }
+    .product-list {
+      display: grid;
+      overflow: hidden;
+    }
+    .mini-product {
+      min-height: 206px;
+      display: grid;
+      grid-template-columns: 132px 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border-bottom: 1px solid var(--line-dark);
+      color: inherit;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .mini-product:hover { background: #fffefa; }
+    .mini-product:last-child { border-bottom: 0; }
+    .mini-thumb {
+      height: 120px;
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      background: #ddd6ca;
+    }
+    .mini-thumb img { transition: transform .45s ease; }
+    .mini-product:hover .mini-thumb img { transform: scale(1.04); }
+    .mini-product h3 { font-size: 24px; letter-spacing: -.03em; }
+    .mini-product p { margin-top: 8px; color: var(--muted-dark); font-size: 14px; max-width: 250px; }
+    .mini-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: rgba(13, 16, 14, .48);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .mini-meta span + span::before {
+      content: "/";
+      margin-right: 8px;
+      color: rgba(13, 16, 14, .28);
+    }
+    .add {
+      min-width: 88px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      place-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #0d100e;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .habit-lab {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 78% 12%, rgba(205, 244, 58, .16), transparent 23%),
+        linear-gradient(180deg, #f4f1ea 0%, #ebe5da 100%);
+      color: #101311;
+    }
+    .habit-lab::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(13, 16, 14, .055) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(13, 16, 14, .04) 1px, transparent 1px);
+      background-size: 120px 120px;
+      mask-image: radial-gradient(circle at 50% 38%, black, transparent 74%);
+      opacity: .45;
+      pointer-events: none;
+    }
+    .habit-lab .container {
+      position: relative;
+      z-index: 1;
+    }
+    .habit-lab .section-head {
+      align-items: center;
+      margin-bottom: 36px;
+    }
+    .habit-lab h2 {
+      max-width: 720px;
+      text-wrap: balance;
+    }
+    .habit-lab .section-copy {
+      max-width: 410px;
+    }
+    .habit-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .habit-stage {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius);
+      background: #d9d1c3;
+      box-shadow: 0 24px 80px rgba(13, 16, 14, .08);
+    }
+    .habit-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 88%;
+      filter: saturate(.94) contrast(1.03);
+    }
+    .habit-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5, 6, 6, .02) 22%, rgba(5, 6, 6, .56) 100%),
+        linear-gradient(90deg, rgba(5, 6, 6, .45), transparent 54%);
+      pointer-events: none;
+    }
+    .habit-overlay {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .habit-step {
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      background: rgba(5, 6, 6, .58);
+      color: var(--ink);
+      backdrop-filter: blur(18px);
+    }
+    .habit-step small {
+      display: block;
+      color: var(--acid);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .habit-step b {
+      display: block;
+      margin-top: 20px;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: -.03em;
+    }
+    .habit-step span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(247, 247, 241, .58);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .habit-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+    }
+    .habit-card {
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.32)),
+        #fbfaf6;
+      box-shadow: 0 18px 64px rgba(13, 16, 14, .055);
+    }
+    .habit-score {
+      padding: 28px;
+    }
+    .habit-score .score-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .habit-score strong {
+      display: block;
+      font-size: clamp(38px, 4vw, 56px);
+      line-height: .86;
+      letter-spacing: -.06em;
+    }
+    .habit-score em {
+      color: #728a47;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .habit-score .score {
+      color: #101311;
+      font-size: 42px;
+      font-weight: 850;
+      line-height: .9;
+      letter-spacing: -.06em;
+      white-space: nowrap;
+    }
+    .habit-score p {
+      margin-top: 20px;
+      color: var(--muted-dark);
+      line-height: 1.7;
+    }
+    .routine-list {
+      display: grid;
+      padding: 0 28px 28px;
+    }
+    .routine-list a {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      min-height: 76px;
+      border-bottom: 1px solid var(--line-dark);
+      transition: transform .2s ease, color .2s ease;
+    }
+    .routine-list a:hover {
+      transform: translateX(4px);
+      color: #516520;
+    }
+    .routine-list a:last-child {
+      border-bottom: 0;
+    }
+    .routine-list small {
+      color: #728a47;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .routine-list b {
+      display: block;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+    .routine-list div span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(13, 16, 14, .55);
+      font-size: 13px;
+    }
+    .routine-list i {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-dark);
+      border-radius: 50%;
+      font-style: normal;
+      font-weight: 900;
+    }
+    .habit-mini {
+      min-height: 178px;
+      display: grid;
+      grid-template-columns: 152px 1fr;
+      gap: 22px;
+      align-items: center;
+      padding: 18px;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(5,6,6,.72), rgba(5,6,6,.9)),
+        #0a0d0b;
+    }
+    .habit-mini figure {
+      height: 140px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #151816;
+    }
+    .habit-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 62%;
+    }
+    .habit-mini h3 {
+      font-size: 28px;
+      line-height: .96;
+      letter-spacing: -.04em;
+    }
+    .habit-mini p {
+      margin-top: 10px;
+      color: rgba(247, 247, 241, .58);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .habit-mini .btn {
+      min-height: 42px;
+      margin-top: 18px;
+      padding: 0 20px;
+    }
+
+    .engineering {
+      position: relative;
+      overflow: hidden;
+      background: #101311;
+      color: var(--ink);
+    }
+    .engineering::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(205, 244, 58, .07), transparent 26%),
+        radial-gradient(circle at 82% 12%, rgba(255, 255, 255, .045), transparent 28%);
+      pointer-events: none;
+    }
+    .engineering .container {
+      position: relative;
+      z-index: 1;
+    }
+    .engineering-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .quote-panel {
+      position: sticky;
+      top: 112px;
+      display: grid;
+      gap: 28px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 30px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.018)),
+        #0b0f0d;
+      box-shadow: 0 24px 90px rgba(0, 0, 0, .18);
+    }
+    .quote-panel blockquote {
+      font-family: var(--serif);
+      font-size: clamp(34px, 3.75vw, 54px);
+      line-height: .96;
+      letter-spacing: -.05em;
+    }
+    .quote-copy p {
+      max-width: 360px;
+      margin-top: 24px;
+      color: rgba(247, 247, 241, .58);
+      line-height: 1.7;
+    }
+    .quote-proof {
+      display: grid;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+    .quote-proof div {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .085);
+    }
+    .quote-proof b {
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+    .quote-proof b::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 10px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 18px rgba(205, 244, 58, .46);
+      vertical-align: 1px;
+    }
+    .quote-proof span {
+      max-width: 190px;
+      color: rgba(247, 247, 241, .56);
+      font-size: 13px;
+      line-height: 1.45;
+      text-align: right;
+    }
+    .quote-note {
+      max-width: 330px;
+      color: rgba(247, 247, 241, .4);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .storage-photo {
+      grid-column: 1 / -1;
+      min-height: 360px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #0a0d0b;
+    }
+    .detail {
+      min-height: 232px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 48%),
+        #0a0d0b;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .detail:hover {
+      transform: translateY(-3px);
+      border-color: rgba(205, 244, 58, .24);
+      background:
+        linear-gradient(180deg, rgba(205, 244, 58, .045), transparent 54%),
+        #0a0d0b;
+    }
+    .metric {
+      display: grid;
+      gap: 8px;
+    }
+    .metric span {
+      display: block;
+      color: var(--acid);
+      font-size: 42px;
+      font-weight: 850;
+      line-height: .9;
+      letter-spacing: -.06em;
+    }
+    .metric small {
+      color: rgba(247, 247, 241, .42);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .detail h3 {
+      margin-top: 34px;
+      font-size: 22px;
+      letter-spacing: -.03em;
+    }
+    .detail p {
+      margin-top: 12px;
+      color: rgba(247, 247, 241, .52);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .ritual {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background:
+        radial-gradient(circle at 78% 14%, rgba(205, 244, 58, .08), transparent 24%),
+        linear-gradient(180deg, #e6e0d4 0%, #ded7ca 100%);
+    }
+    .ritual-visual {
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: #d2c9ba;
+    }
+    .ritual-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(226, 221, 210, .05), rgba(226, 221, 210, .24));
+      pointer-events: none;
+    }
+    .ritual-visual img {
+      filter: saturate(.88) contrast(1.02);
+    }
+    .ritual-copy {
+      padding: clamp(48px, 8vw, 112px);
+      align-self: center;
+    }
+    .ritual-copy p {
+      margin-top: 24px;
+      color: var(--muted-dark);
+      font-size: 17px;
+      line-height: 1.75;
+      max-width: 520px;
+    }
+    .ritual-list {
+      display: grid;
+      gap: 0;
+      margin-top: 36px;
+      max-width: 520px;
+      padding: 0;
+      border-top: 1px solid rgba(16, 19, 17, .14);
+    }
+    .ritual-list li {
+      list-style: none;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 22px;
+      align-items: start;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(16, 19, 17, .14);
+      color: rgba(16, 19, 17, .74);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .ritual-list li:hover {
+      transform: translateX(4px);
+      border-color: rgba(16, 19, 17, .26);
+    }
+    .ritual-list .time {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(16, 19, 17, .15);
+      border-radius: 999px;
+      background: #101311;
+      color: var(--acid);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: -.05em;
+    }
+    .ritual-list b {
+      display: block;
+      color: #101311;
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+    .ritual-list span:not(.time) {
+      display: block;
+      margin-top: 5px;
+      color: rgba(16, 19, 17, .58);
+      line-height: 1.5;
+    }
+    .ritual-foot {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      max-width: 520px;
+    }
+    .ritual-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(16, 19, 17, .58);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .ritual-proof::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 18px rgba(141, 171, 35, .42);
+    }
+
+    .reviews {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(205, 244, 58, .16), transparent 23%),
+        linear-gradient(180deg, #fbfaf6 0%, #f2eee5 100%);
+    }
+    .reviews .section-head {
+      align-items: center;
+      margin-bottom: 34px;
+    }
+    .reviews h2 { text-wrap: balance; }
+    .review-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+      color: rgba(13, 16, 14, .56);
+      font-size: 14px;
+    }
+    .review-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 42px;
+      border: 1px solid var(--line-dark);
+      border-radius: 999px;
+      padding: 0 15px;
+      background: rgba(255, 255, 255, .5);
+      color: #101311;
+      font-weight: 800;
+    }
+    .review-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .review-controls {
+      display: inline-flex;
+      gap: 8px;
+    }
+    .review-control {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line-dark);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .58);
+      color: #101311;
+      font-size: 20px;
+      line-height: 1;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .review-control:hover {
+      transform: translateY(-2px);
+      border-color: rgba(13, 16, 14, .24);
+      background: #101311;
+      color: var(--ink);
+    }
+    .review-score .stars {
+      color: var(--acid);
+      text-shadow: 0 0 18px rgba(205, 244, 58, .24);
+    }
+    .review-slider {
+      position: relative;
+      overflow: hidden;
+      margin-inline: calc((100vw - min(100% - 48px, 1180px)) / -2);
+      padding: 0 calc((100vw - min(100% - 48px, 1180px)) / 2);
+    }
+    .review-slider::before,
+    .review-slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      width: max(42px, calc((100vw - 1180px) / 2 + 44px));
+      pointer-events: none;
+    }
+    .review-slider::before {
+      left: 0;
+      background: linear-gradient(90deg, #fbfaf6 0%, rgba(251, 250, 246, 0) 100%);
+    }
+    .review-slider::after {
+      right: 0;
+      background: linear-gradient(270deg, #f2eee5 0%, rgba(242, 238, 229, 0) 100%);
+    }
+    .review-track {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      padding: 4px 0 18px;
+      animation: reviewMarquee 62s linear infinite;
+      will-change: transform;
+    }
+    @keyframes reviewMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 8px)); }
+    }
+    .review-card {
+      position: relative;
+      flex: 0 0 min(420px, calc(100vw - 56px));
+      min-height: 396px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid rgba(13, 16, 14, .13);
+      border-radius: var(--radius);
+      padding: 30px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, .3)),
+        var(--paper);
+      box-shadow: 0 24px 80px rgba(13, 16, 14, .06);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(13, 16, 14, .22);
+      box-shadow: 0 30px 96px rgba(13, 16, 14, .1);
+    }
+    .review-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 88% 10%, rgba(205, 244, 58, .16), transparent 28%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    .review-card:hover::after { opacity: 1; }
+    .review-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .review-product {
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(13, 16, 14, .1);
+      border-radius: 999px;
+      padding: 0 10px;
+      color: rgba(13, 16, 14, .54);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .review-card p {
+      align-self: center;
+      font-family: var(--serif);
+      font-size: clamp(25px, 2.1vw, 32px);
+      line-height: 1.08;
+      letter-spacing: -.04em;
+      text-wrap: pretty;
+    }
+    .review-card footer {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted-dark);
+      font-size: 14px;
+    }
+    .review-card footer strong {
+      display: block;
+      color: #101311;
+      font-size: 15px;
+    }
+    .review-card footer small {
+      display: block;
+      margin-top: 4px;
+      color: rgba(13, 16, 14, .48);
+      font-size: 12px;
+    }
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--moss);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .verified::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--acid);
+    }
+
+    .journal {
+      position: relative;
+      overflow: hidden;
+      background: #101311;
+      color: var(--ink);
+    }
+    .journal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(205, 244, 58, .09), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 38%);
+      pointer-events: none;
+    }
+    .journal .container { position: relative; z-index: 1; }
+    .journal .section-copy { color: rgba(247, 247, 241, .6); }
+    .journal-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .95fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .article {
+      min-height: 520px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 22px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)),
+        #080a09;
+      overflow: hidden;
+      position: relative;
+      transition: transform .3s ease, border-color .3s ease, background .3s ease;
+    }
+    .article:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, .2);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.018)),
+        #080a09;
+    }
+    .article-media {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #171b18;
+    }
+    .article:first-child .article-media { height: 300px; }
+    .article-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .86;
+      filter: saturate(.86) contrast(1.05);
+      transition: transform .7s cubic-bezier(.2, .7, .2, 1), opacity .3s ease;
+    }
+    .article:first-child .article-media img { object-position: center 72%; }
+    .article:nth-child(2) .article-media img { object-position: center 58%; }
+    .article:nth-child(3) .article-media img { object-position: center 62%; }
+    .article:hover .article-media img {
+      transform: scale(1.045);
+      opacity: .96;
+    }
+    .article-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5,6,6,0) 35%, rgba(5,6,6,.5) 100%);
+      pointer-events: none;
+    }
+    .article h3 {
+      max-width: 440px;
+      font-size: clamp(30px, 3vw, 44px);
+      line-height: .96;
+      letter-spacing: -.05em;
+      text-wrap: balance;
+    }
+    .article p {
+      margin-top: 16px;
+      color: rgba(247, 247, 241, .6);
+      line-height: 1.6;
+    }
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: rgba(247, 247, 241, .48);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 44px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 18px;
+      color: rgba(247, 247, 241, .76);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .article-link span {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 50%;
+      color: var(--acid);
+      transition: transform .25s ease, background .25s ease;
+    }
+    .article:hover .article-link span {
+      transform: translateX(3px);
+      background: rgba(205, 244, 58, .11);
+    }
+
+    .final-cta {
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      padding: 104px 0;
+      background:
+        radial-gradient(circle at 22% 24%, rgba(205, 244, 58, .11), transparent 24%),
+        radial-gradient(circle at 84% 62%, rgba(143, 161, 160, .1), transparent 28%),
+        linear-gradient(180deg, rgba(5, 6, 6, .1), rgba(5, 6, 6, .9)),
+        #080a09;
+    }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+      background-size: 96px 96px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 68%);
+      opacity: .38;
+      pointer-events: none;
+    }
+    .final-cta .container { position: relative; z-index: 1; }
+    .final-panel {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(420px, 1.08fr);
+      gap: 64px;
+      align-items: center;
+    }
+    .final-copy h2 {
+      max-width: 560px;
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: .92;
+      letter-spacing: -.05em;
+    }
+    .final-cta p {
+      max-width: 500px;
+      margin: 24px 0 0;
+      color: rgba(247, 247, 241, .62);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+    .final-cta .hero-actions { margin-top: 30px; }
+    .final-proof {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      color: rgba(247, 247, 241, .48);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .final-proof span + span::before {
+      content: "+";
+      margin-right: 18px;
+      color: var(--acid);
+    }
+    .final-products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .final-product {
+      min-height: 390px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      align-items: stretch;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .045);
+      backdrop-filter: blur(16px);
+      transition: transform .28s ease, border-color .28s ease, background .28s ease;
+    }
+    .final-product:hover {
+      transform: translateY(-3px);
+      border-color: rgba(205, 244, 58, .32);
+      background: rgba(255, 255, 255, .065);
+    }
+    .final-thumb {
+      height: 250px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      overflow: hidden;
+      background: #151816;
+    }
+    .final-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.88) contrast(1.04);
+      transition: transform .5s ease;
+    }
+    .final-product:hover .final-thumb img { transform: scale(1.04); }
+    .final-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding: 22px;
+    }
+    .final-product h3 {
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    .final-product p {
+      margin-top: 8px;
+      color: rgba(247, 247, 241, .55);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .final-product small {
+      display: inline-flex;
+      color: var(--acid);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .final-arrow {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 50%;
+      color: var(--acid);
+      font-weight: 900;
+      transition: transform .25s ease, background .25s ease;
+    }
+    .final-product:hover .final-arrow {
+      transform: translateX(3px);
+      background: rgba(205, 244, 58, .12);
+    }
+    footer.site-footer {
+      background: #050606;
+      color: rgba(247, 247, 241, .46);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding: 34px 0;
+      font-size: 13px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-inner nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .nav-inner { width: calc(100% - 40px); }
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links, .nav-actions { display: none; }
+      .site-nav.is-open {
+        background: rgba(5, 6, 6, .94);
+      }
+      .site-nav.is-open .nav-inner {
+        grid-template-columns: 1fr auto;
+        height: auto;
+        padding: 14px 0 18px;
+      }
+      .site-nav.is-open .brand { justify-self: start; grid-column: 1; grid-row: 1; }
+      .site-nav.is-open .menu { grid-column: 2; grid-row: 1; }
+      .site-nav.is-open .nav-links,
+      .site-nav.is-open .nav-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        min-height: auto;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0;
+        padding-top: 12px;
+      }
+      .site-nav.is-open .nav-links {
+        flex-direction: column;
+        border-top: 1px solid rgba(255,255,255,.09);
+      }
+      .site-nav.is-open .nav-actions {
+        gap: 20px;
+        color: rgba(247,247,241,.58);
+      }
+      .site-nav.is-open .nav-links a,
+      .site-nav.is-open .nav-actions a {
+        min-height: 42px;
+      }
+      .menu {
+        display: inline-grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, .12);
+        color: var(--ink);
+        background: transparent;
+      }
+      .hero { min-height: 860px; }
+      .hero-image { inset: 0; opacity: .72; background-size: auto 100%; background-position: 62% bottom; }
+      .hero-inner { min-height: 860px; }
+      .hero-copy { padding-top: 64px; align-self: start; }
+      .capacity { top: 43%; right: 20px; }
+      .quiet { right: auto; left: 20px; bottom: 22%; }
+      .hero-proof { grid-template-columns: repeat(3, 1fr); }
+      .featured { grid-column: 1 / -1; justify-content: start; padding: 24px; border-left: 1px solid rgba(255,255,255,.08); }
+      .section-head, .product-grid, .habit-grid, .engineering-grid, .ritual, .journal-grid { grid-template-columns: 1fr; }
+      .quote-panel { position: static; }
+      .final-panel { grid-template-columns: 1fr; }
+      .path-grid, .detail-grid { grid-template-columns: 1fr; }
+      .habit-stage { min-height: 680px; }
+      .habit-overlay { grid-template-columns: 1fr; }
+      .habit-mini { grid-template-columns: 1fr; }
+      .habit-mini figure { height: 220px; }
+      .path-meta { grid-template-columns: 1fr; align-items: start; }
+      .path-meta .btn { justify-self: start; }
+      .review-summary { align-items: flex-start; flex-direction: column; }
+      .ritual-visual { min-height: 420px; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 32px, 1180px); }
+      .announce { height: 30px; font-size: 9px; }
+      .site-nav { top: 30px; }
+      .hero, .hero-inner { min-height: 820px; }
+      .hero h1 { font-size: clamp(49px, 15vw, 68px); }
+      .hero-copy { padding-top: 42px; }
+      .hero-actions .btn { width: 100%; }
+      .callout { transform: scale(.88); transform-origin: right center; }
+      .quiet { left: 8px; }
+      .capacity { right: 0; }
+      .hero-proof { grid-template-columns: 1fr; }
+      .hero-stat { min-height: 78px; }
+      .featured { display: none; }
+      .section { padding: 76px 0; }
+      .section-head { gap: 22px; margin-bottom: 30px; }
+      .path-card { padding: 22px; row-gap: 22px; }
+      .path-visual { height: 300px; }
+      .path-meta { display: grid; }
+      .path-meta h3 { font-size: clamp(34px, 11vw, 44px); }
+      .path-meta .btn { margin-top: 26px; width: 100%; }
+      .habit-stage { min-height: 720px; }
+      .habit-overlay { left: 18px; right: 18px; bottom: 18px; }
+      .habit-score, .routine-list { padding-left: 22px; padding-right: 22px; }
+      .habit-score .score-row { grid-template-columns: 1fr; }
+      .habit-score .score { font-size: 34px; }
+      .routine-list a { grid-template-columns: 1fr auto; gap: 12px; }
+      .routine-list small { grid-column: 1 / -1; }
+      .feature-body, .mini-product { grid-template-columns: 1fr; }
+      .mini-thumb { width: 100%; }
+      .add { justify-self: start; }
+      .review-slider { margin-inline: -16px; padding-inline: 16px; }
+      .review-track {
+        gap: 12px;
+        padding-inline: 0;
+        animation-duration: 54s;
+      }
+      .review-card { flex-basis: calc(100vw - 44px); min-height: 390px; padding: 24px; }
+      .review-card p { font-size: 26px; }
+      .review-card footer { align-items: start; flex-direction: column; }
+      .final-cta { padding: 78px 0; }
+      .final-product { grid-template-columns: 1fr; }
+      .final-thumb { height: 220px; }
+      .final-arrow { justify-self: start; }
+      .final-products { grid-template-columns: 1fr; }
+      .final-proof { display: grid; gap: 10px; }
+      .final-proof span + span::before { display: none; }
+      .ritual-copy { padding: 56px 24px; }
+      .ritual-list li { grid-template-columns: 1fr; }
+      .ritual-list .time { width: 44px; height: 44px; }
+      .ritual-foot .btn { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="announce" aria-label="Klyme store benefits">
+    <span>Free Shipping Over $150 + 2-Year Warranty</span>
+  </div>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <div class="nav-links" aria-label="Product navigation">
+        <a href="#walking-pads">Walking Pads</a>
+        <a href="#steppers">Steppers</a>
+        <a href="#story">Our Story</a>
+        <a href="#journal">Journal</a>
+      </div>
+      <a class="brand" href="#" aria-label="Klyme home"><img class="brand-logo" src="assets/klyme-logo-white-source.png" alt="KLYME" /></a>
+      <div class="nav-actions">
+        <a href="#">Search</a>
+        <a href="#">Account</a>
+        <a class="cart" href="checkout.html" data-count="0">Cart</a>
+      </div>
+      <button class="menu" type="button" aria-label="Open menu" aria-expanded="false">=</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-image" aria-hidden="true"></div>
+      <div class="callout capacity">
+        <span class="icon" aria-hidden="true">*</span>
+        <span><b>330 <span>lbs</span></b><small>Max capacity</small></span>
+      </div>
+      <div class="callout quiet">
+        <span class="icon" aria-hidden="true">o</span>
+        <span><b>42 <span>dB</span></b><small>Whisper quiet</small></span>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">Every step, elevated</div>
+          <h1 id="hero-title">Movement that fits <em>your life.</em></h1>
+          <p>Premium walking pads and stair steppers for workdays, small spaces, and routines you can actually keep. <strong>Starting from $179.</strong></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#walking-pads">Shop Walking Pads <span aria-hidden="true">-></span></a>
+            <a class="btn btn-secondary" href="#steppers">Explore Steppers</a>
+          </div>
+          <div class="review-row" aria-label="Rated 4.9 from 2,400 plus reviews">
+            <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span>4.9 from 2,400+ reviews</span>
+          </div>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-stat"><div><b>42</b><span>dB</span><small>Operating volume</small></div></div>
+          <div class="hero-stat"><div><b>330</b><span>lbs</span><small>Weight capacity</small></div></div>
+          <div class="hero-stat"><div><b>60</b><span>days</span><small>Risk-free trial</small></div></div>
+          <div class="featured"><span>As featured in</span><span>Forbes</span><span>WIRED</span><span>GQ</span><span>Men's Health</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section paths" id="walking-pads">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Choose your movement</div>
+            <h2>Designed around the way your day actually moves.</h2>
+          </div>
+          <p class="section-copy">Choose quiet daily miles or compact vertical burn. Every Klyme product is tuned for low noise, quick storage, and repeatable movement at home.</p>
+        </div>
+        <div class="path-grid">
+          <article class="path-card">
+            <span class="chip">Under-desk daily movement</span>
+            <div class="path-visual">
+              <img src="assets/lifestyle-walking-pad-warm.png" alt="Klyme walking pad in a warm home interior" />
+              <span class="path-label">Quiet daily cardio</span>
+            </div>
+            <div class="path-meta">
+              <div>
+                <h3>Walking pads for focused flow.</h3>
+                <p>Smooth belts, apartment-ready storage, and planted stability for work calls, evening resets, and everything between.</p>
+                <ul class="path-specs" aria-label="Walking pad highlights">
+                  <li>42 dB motor</li>
+                  <li>Vertical storage</li>
+                  <li>Workday ready</li>
+                </ul>
+              </div>
+              <a class="btn btn-primary" href="#products">Shop Pads</a>
+            </div>
+          </article>
+          <article class="path-card" id="steppers">
+            <span class="chip">Compact cardio intensity</span>
+            <div class="path-visual">
+              <img src="assets/lifestyle-stepper-bright.png" alt="Klyme stair stepper in a bright apartment" />
+              <span class="path-label">Low-impact vertical burn</span>
+            </div>
+            <div class="path-meta">
+              <div>
+                <h3>Steppers with a smaller footprint.</h3>
+                <p>Low-impact climbing resistance for quick sessions, smaller rooms, and people who want sweat without setup.</p>
+                <ul class="path-specs" aria-label="Stepper highlights">
+                  <li>Compact frame</li>
+                  <li>Hydraulic resistance</li>
+                  <li>Fast sessions</li>
+                </ul>
+              </div>
+              <a class="btn btn-secondary" href="#products">Shop Steppers</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products" id="products">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Best sellers</div>
+            <h2>The lineup, simplified.</h2>
+          </div>
+          <p class="section-copy">Start with the way you move most: quiet daily steps, compact cardio, or a higher-output climb. Compare the essentials, then choose the model built for your routine.</p>
+        </div>
+        <div class="product-toolbar" aria-label="Product filters">
+          <div class="selector-pills" aria-hidden="true">
+            <span>All</span>
+            <span>Walking Pads</span>
+            <span>Steppers</span>
+            <span>Small Spaces</span>
+          </div>
+          <span>60-day trial on every model</span>
+        </div>
+        <div class="product-grid">
+          <article class="feature-product">
+            <div class="feature-top"><img src="assets/lifestyle-walking-pad-loft.png" alt="Stride Pro walking pad in a loft fitness space" /></div>
+            <div class="feature-body">
+              <div>
+                <div class="section-kicker">Most popular</div>
+                <h3>Stride Pro</h3>
+                <p>Our quietest walking pad with a wider belt, magnetic remote, and easy vertical storage.</p>
+                <div class="product-badges"><span>42 dB motor</span><span>Wide belt</span><span>Vertical storage</span></div>
+              </div>
+              <div class="feature-actions">
+                <div class="price">$299</div>
+                <a class="btn btn-dark" href="stride-pro.html">View Product</a>
+                <span class="product-note">Best for daily desk miles.</span>
+              </div>
+            </div>
+          </article>
+          <div class="product-list">
+            <a class="mini-product" href="stride-lite.html">
+              <div class="mini-thumb"><img src="assets/lifestyle-walking-pad-warm.png" alt="Stride Lite walking pad in a warm home interior" /></div>
+              <div>
+                <h3>Stride Lite</h3>
+                <p>Entry walking pad for home offices and small apartments.</p>
+                <div class="mini-meta"><span>Walking pad</span><span>Best value</span></div>
+                <div class="price">$249</div>
+              </div>
+              <span class="add" aria-label="View Stride Lite">View</span>
+            </a>
+            <a class="mini-product" href="step-v1.html">
+              <div class="mini-thumb"><img src="assets/lifestyle-stepper-soft.png" alt="Step V1 stair stepper in a soft living room" /></div>
+              <div>
+                <h3>Step V1</h3>
+                <p>Portable stair stepper with smooth hydraulic resistance.</p>
+                <div class="mini-meta"><span>Stepper</span><span>Low impact</span></div>
+                <div class="price">$179</div>
+              </div>
+              <span class="add" aria-label="View Step V1">View</span>
+            </a>
+            <a class="mini-product" href="climb-pro.html">
+              <div class="mini-thumb"><img src="assets/lifestyle-stepper-tv.png" alt="Climb Pro stair stepper paired with guided TV workout" /></div>
+              <div>
+                <h3>Climb Pro</h3>
+                <p>Full-body vertical stepper for higher output sessions.</p>
+                <div class="mini-meta"><span>Stepper</span><span>High output</span></div>
+                <div class="price">$279</div>
+              </div>
+              <span class="add" aria-label="View Climb Pro">View</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section habit-lab" aria-labelledby="habit-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Frictionless by design</div>
+            <h2 id="habit-title">The routine starts before motivation has a vote.</h2>
+          </div>
+          <p class="section-copy">Klyme is built around the small moments people actually repeat: roll it out, move for a few minutes, and put the room back together.</p>
+        </div>
+        <div class="habit-grid">
+          <div class="habit-stage">
+            <img src="assets/lifestyle-walking-pad-home.png" alt="Klyme walking pad used in a bright home room" />
+            <div class="habit-overlay" aria-label="How Klyme fits into a daily routine">
+              <div class="habit-step"><small>01</small><b>Roll out</b><span>From storage to ready without rearranging the room.</span></div>
+              <div class="habit-step"><small>02</small><b>Move naturally</b><span>Walk or climb through the minutes already on your calendar.</span></div>
+              <div class="habit-step"><small>03</small><b>Store cleanly</b><span>Slide it away so your home still feels like home.</span></div>
+            </div>
+          </div>
+          <div class="habit-panel">
+            <div class="habit-card habit-score">
+              <div class="score-row">
+                <strong>Less setup. <em>More follow-through.</em></strong>
+                <div class="score">Easy</div>
+              </div>
+              <p>People repeat what feels close at hand. Every Klyme product is tuned for visible access, quiet use, and fast reset so movement becomes easier to start again tomorrow.</p>
+            </div>
+            <div class="habit-card routine-list">
+              <a href="stride-pro.html"><small>Workday</small><div><b>Desk miles without a treadmill room</b><span>Stride Pro keeps long focus blocks moving.</span></div><i aria-hidden="true">-></i></a>
+              <a href="step-v1.html"><small>Reset</small><div><b>Ten-minute cardio between calls</b><span>Step V1 adds intensity without setup.</span></div><i aria-hidden="true">-></i></a>
+              <a href="climb-pro.html"><small>Training</small><div><b>Higher-output sessions at home</b><span>Climb Pro turns compact space into real burn.</span></div><i aria-hidden="true">-></i></a>
+            </div>
+            <div class="habit-card habit-mini">
+              <figure><img src="assets/lifestyle-walking-pad-warm.png" alt="Klyme walking pad in a warm home space" /></figure>
+              <div>
+                <h3>Designed for the reset.</h3>
+                <p>The product disappears quickly when the session is done, which makes the next session easier to begin.</p>
+                <a class="btn btn-primary" href="#products">Shop the lineup</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section engineering" id="story">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Built for real homes</div>
+            <h2>Performance equipment without the fitness-room footprint.</h2>
+          </div>
+          <p class="section-copy">Quieter motors, sturdier frames, smaller footprints, and a home trial that lets the habit prove itself.</p>
+        </div>
+        <div class="engineering-grid">
+          <aside class="quote-panel">
+            <div class="quote-copy">
+              <blockquote>The best fitness product is the one you never have to talk yourself into using.</blockquote>
+              <p>Built to stay close, store cleanly, and move quietly enough for the life already happening around it.</p>
+            </div>
+            <div class="quote-proof" aria-label="Klyme design principles">
+              <div><b>Visible access</b><span>Easy to start because it stays within reach</span></div>
+              <div><b>Quiet presence</b><span>Made for shared rooms, calls, and late sessions</span></div>
+              <div><b>Clean reset</b><span>Designed to leave the room feeling calm afterward</span></div>
+            </div>
+            <div class="quote-note">No spare room. No loud machine. No daily negotiation.</div>
+          </aside>
+          <div class="detail-grid">
+            <div class="storage-photo"><img src="assets/lifestyle-walking-pad-warm.png" alt="Klyme walking pad designed for home spaces" /></div>
+            <article class="detail"><div class="metric"><span>42 dB</span><small>Whisper-quiet motor</small></div><h3>Quiet enough for calls</h3><p>Brushless drive systems and belt isolation keep movement soft enough for shared offices, apartments, and late-night sessions.</p></article>
+            <article class="detail"><div class="metric"><span>7 in</span><small>Low-profile storage</small></div><h3>Stores where life happens</h3><p>Compact frames slide under furniture or stand vertically in a closet, so your room still feels like a room.</p></article>
+            <article class="detail"><div class="metric"><span>330 lb</span><small>Tested support</small></div><h3>Stability you can feel</h3><p>Reinforced frames and wide stance geometry help reduce wobble while keeping each stride grounded.</p></article>
+            <article class="detail"><div class="metric"><span>60 days</span><small>Home trial</small></div><h3>Try it at home</h3><p>Build the habit in your own space before deciding, with a risk-free trial designed for real-world use.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ritual" aria-labelledby="ritual-title">
+      <div class="ritual-visual">
+        <img src="assets/lifestyle-stepper-tv.png" alt="Klyme stair stepper used during a guided living room workout" />
+      </div>
+      <div class="ritual-copy">
+        <div class="section-kicker">Daily ritual</div>
+        <h2 id="ritual-title">Make movement feel less like a task.</h2>
+        <p>A Klyme routine meets you in the rooms and minutes you already have. No dedicated gym corner. No long warmup. Just a few repeatable ways to move more often.</p>
+        <ul class="ritual-list">
+          <li><span class="time">01</span><div><b>Morning reset</b><span>Ten quiet minutes before the inbox starts pulling.</span></div></li>
+          <li><span class="time">02</span><div><b>Meeting miles</b><span>Low-effort walking through planning calls and focus blocks.</span></div></li>
+          <li><span class="time">03</span><div><b>Evening climb</b><span>Compact cardio when you want a real reset without leaving home.</span></div></li>
+        </ul>
+        <div class="ritual-foot">
+          <a class="btn btn-dark" href="#products">Find your fit</a>
+          <span class="ritual-proof">60-day home trial on every model</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">12,000+ movers</div>
+            <h2>Real Routines, Real Progress.</h2>
+          </div>
+          <p class="section-copy">Customers come for the compact footprint and stay because Klyme fits into calls, small rooms, and the quiet minutes they already have.</p>
+        </div>
+        <div class="review-summary" aria-label="Customer review summary">
+          <div class="review-score"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>4.9 average rating</span></div>
+          <div class="review-meta">
+            <span>Based on 2,400+ verified home workouts and workday walks</span>
+            <div class="review-controls" aria-label="Review slider controls">
+              <button class="review-control" type="button" data-review-dir="-1" aria-label="Previous review">&larr;</button>
+              <button class="review-control" type="button" data-review-dir="1" aria-label="Next review">&rarr;</button>
+            </div>
+          </div>
+        </div>
+        <div class="review-slider" aria-label="Customer reviews slider">
+          <div class="review-track">
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Stride Pro</span></div>
+              <p>"I bought it for meetings and ended up using it after dinner too. It is quiet enough that nobody on Zoom has noticed, which was my whole test."</p>
+              <footer><span><strong>Sarah M.</strong><small>Product lead, Chicago</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Stride Lite</span></div>
+              <p>"The best part is that it does not feel like workout gear sitting in my living room. I leave it out, so I actually use it."</p>
+              <footer><span><strong>James T.</strong><small>Software engineer, Austin</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Step V1</span></div>
+              <p>"Ten minutes on the stepper is enough to change my mood. It is small, a little humbling, and exactly what I wanted between calls."</p>
+              <footer><span><strong>Maya R.</strong><small>Designer, Portland</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Stride Pro</span></div>
+              <p>"I was worried it would wobble because I am not a small person. It feels planted, rolls out easily, and stores beside the bookcase."</p>
+              <footer><span><strong>Andre L.</strong><small>Remote manager, Atlanta</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Climb Pro</span></div>
+              <p>"This replaced the gym days I kept skipping. I put on a show, climb for twenty minutes, and I am done before I can negotiate with myself."</p>
+              <footer><span><strong>Nina P.</strong><small>New parent, Denver</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Stride Lite</span></div>
+              <p>"It slides under the bed in about five seconds. That sounds boring, but it is the reason I have used it almost every day."</p>
+              <footer><span><strong>Priya S.</strong><small>Consultant, San Jose</small></span><span class="verified">Verified</span></footer>
+            </article>
+            <article class="review-card">
+              <div class="review-top"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="review-product">Step V1</span></div>
+              <p>"I like that there is no app, no subscription, no big ritual. I just step on it when coffee is brewing and somehow that became a routine."</p>
+              <footer><span><strong>Lauren B.</strong><small>Teacher, Raleigh</small></span><span class="verified">Verified</span></footer>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section journal" id="journal">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">The Journal</div>
+            <h2>Better movement, better days.</h2>
+          </div>
+          <p class="section-copy">Practical ideas for turning small pockets of time into better energy, better focus, and better training consistency.</p>
+        </div>
+        <div class="journal-grid">
+          <a class="article" href="blog-workday-steps.html">
+            <div class="article-meta"><span>Guide</span><span>6 min read</span></div>
+            <div class="article-media"><img src="assets/lifestyle-walking-pad-home.png" alt="Man walking on a Klyme walking pad in a home office" /></div>
+            <div><h3>How many steps should you add to a workday?</h3><p>A practical way to build daily volume around meetings, focus blocks, and the moments you already have.</p></div>
+            <div class="article-link">Read the guide <span aria-hidden="true">-></span></div>
+          </a>
+          <a class="article" href="blog-stepper-intervals.html">
+            <div class="article-meta"><span>Training</span><span>5 min read</span></div>
+            <div class="article-media"><img src="assets/lifestyle-stepper-soft.png" alt="Woman using a compact Klyme stair stepper in a living room" /></div>
+            <div><h3>Stepper intervals for small spaces.</h3><p>Three low-impact formats that make compact cardio feel structured, repeatable, and easy to start.</p></div>
+            <div class="article-link">See the formats <span aria-hidden="true">-></span></div>
+          </a>
+          <a class="article" href="blog-quiet-equipment.html">
+            <div class="article-meta"><span>Design</span><span>7 min read</span></div>
+            <div class="article-media"><img src="assets/lifestyle-walking-pad-loft.png" alt="Klyme walking pad in a loft fitness space" /></div>
+            <div><h3>Why quiet fitness equipment changes usage.</h3><p>The design psychology behind removing friction from movement, and why sound changes consistency.</p></div>
+            <div class="article-link">Explore the design <span aria-hidden="true">-></span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-panel">
+          <div class="final-copy">
+            <div class="section-kicker">Start with one step</div>
+            <h2>Movement that earns a place at home.</h2>
+            <p>Quiet walking pads and compact steppers built for the rooms, routines, and minutes you already have.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#products">Shop Best Sellers <span aria-hidden="true">-></span></a>
+              <a class="btn btn-secondary" href="#journal">Read the Journal</a>
+            </div>
+            <div class="final-proof" aria-label="Klyme shopping benefits">
+              <span>4.9 average rating</span>
+              <span>60-day home trial</span>
+              <span>2-year warranty</span>
+            </div>
+          </div>
+          <div class="final-products" aria-label="Choose a Klyme product category">
+            <a class="final-product" href="stride-pro.html">
+              <div class="final-thumb"><img src="assets/lifestyle-walking-pad-loft.png" alt="Klyme walking pad in a loft space" /></div>
+              <div class="final-body">
+                <div>
+                  <h3>Walking pads</h3>
+                  <p>Quiet daily steps.</p>
+                  <small>From $249</small>
+                </div>
+                <span class="final-arrow" aria-hidden="true">-></span>
+              </div>
+            </a>
+            <a class="final-product" href="step-v1.html">
+              <div class="final-thumb"><img src="assets/lifestyle-stepper-tv.png" alt="Klyme stair stepper in a living room" /></div>
+              <div class="final-body">
+                <div>
+                  <h3>Stair steppers</h3>
+                  <p>Compact vertical burn.</p>
+                  <small>From $179</small>
+                </div>
+                <span class="final-arrow" aria-hidden="true">-></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>KLYME. Every step, elevated.</span>
+      <nav aria-label="Footer navigation">
+        <a href="#">Warranty</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("main img").forEach((img, index) => {
+        if (index > 1) img.loading = "lazy";
+        img.decoding = "async";
+      });
+
+      const nav = document.querySelector(".site-nav");
+      const menu = document.querySelector(".menu");
+      if (nav && menu) {
+        menu.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("is-open");
+          menu.setAttribute("aria-expanded", String(isOpen));
+          menu.textContent = isOpen ? "x" : "=";
+        });
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("is-open");
+            menu.setAttribute("aria-expanded", "false");
+            menu.textContent = "=";
+          });
+        });
+      }
+
+      try {
+        const cart = JSON.parse(localStorage.getItem("klymeCart") || "[]");
+        const count = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
+        document.querySelectorAll(".cart").forEach((cartLink) => {
+          cartLink.dataset.count = String(count);
+          cartLink.setAttribute("aria-label", `Cart, ${count} item${count === 1 ? "" : "s"}`);
+        });
+      } catch (error) {
+        document.querySelectorAll(".cart").forEach((cartLink) => cartLink.dataset.count = "0");
+      }
+    })();
+
+    (() => {
+      const section = document.querySelector(".reviews");
+      const track = document.querySelector(".review-track");
+      const controls = document.querySelectorAll("[data-review-dir]");
+      if (!section || !track) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      Array.from(track.children).forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      });
+
+      if (prefersReducedMotion) {
+        track.style.animation = "none";
+      }
+
+      const pauseBriefly = () => {
+        track.style.animationPlayState = "paused";
+        window.clearTimeout(track.resumeTimer);
+        track.resumeTimer = window.setTimeout(() => {
+          track.style.animationPlayState = "";
+        }, 3500);
+      };
+
+      controls.forEach((button) => {
+        button.addEventListener("click", () => {
+          track.style.animationDirection = Number(button.dataset.reviewDir) < 0 ? "reverse" : "normal";
+          pauseBriefly();
+        });
+      });
+
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          track.style.animationPlayState = entry.isIntersecting ? "" : "paused";
+        });
+      }, { threshold: .35 }).observe(section);
+    })();
+  </script>
+</body>
+</html>
